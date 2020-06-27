@@ -49,11 +49,11 @@
     "typescript": "3.9.5"
   },
   "dependencies": {
-    "ip": "1.1.5",
+    "ip": "git+https://github.com/chrisc93/node-ip.git",
     "smart-buffer": "^4.1.0"
   },
   "scripts": {
-    "prepublish": "npm install -g typescript && npm run build",
+    "postinstall": "npm install -g typescript && tsc -p .",
     "test": "NODE_ENV=test mocha --recursive --require ts-node/register test/**/*.ts",
     "prettier": "prettier --write ./src/**/*.ts --config .prettierrc.yaml",
     "coverage": "NODE_ENV=test nyc npm test",

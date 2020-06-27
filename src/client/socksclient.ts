@@ -1,5 +1,6 @@
+// @ts-nocheck
 import {EventEmitter} from 'events';
-import * as net from 'net';
+const net = global.net;
 import * as ip from 'ip';
 import {SmartBuffer} from 'smart-buffer';
 import {
@@ -310,18 +311,6 @@ class SocksClient extends EventEmitter implements SocksClient {
         (this.socket as net.Socket).setNoDelay(!!this.options.set_tcp_nodelay);
       }
     }
-
-    // Listen for established event so we can re-emit any excess data received during handshakes.
-    this.prependOnceListener('established', (info) => {
-      setImmediate(() => {
-        if (this.receiveBuffer.length > 0) {
-          const excessData = this.receiveBuffer.get(this.receiveBuffer.length);
-
-          info.socket.emit('data', excessData);
-        }
-        info.socket.resume();
-      });
-    });
   }
 
   // Socket options (defaults host/port to options.proxy.host/options.proxy.port)
