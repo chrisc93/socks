@@ -33,7 +33,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "ip": "^1.1.4",
+    "ip": "git+https://github.com/chrisc93/node-ip.git",
     "smart-buffer": "^1.0.13"
   }
 }
